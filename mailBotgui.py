@@ -1,4 +1,4 @@
-ple# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'mailBot.ui'
 #
@@ -9,13 +9,15 @@ ple# -*- coding: utf-8 -*-
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from sendmail import Email
+import re
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(830, 615)
+        MainWindow.resize(800, 600)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -114,18 +116,50 @@ class Ui_MainWindow(object):
 
         self.sendbutton.clicked.connect(self.sendmail)
 
-    # def buttonSet(self):
-    #     self.sendbutton.clicked.connect(self.printfunc())
-
     def sendmail(self):
-        mail_to = "example@gmail.com"
-        email_obj = Email(mail_to)
 
-        if mail_to:
-            email_obj.send()
-        else:
-            print("mail id not found")
-            
+        email_obj = Email()
+        # get the subject from user
+        sub = self.subjectlineEdit.text()
+        # run if user entered the subject else the default subject value wshall be used
+
+        emaillist = self.emailTotextEdit.toPlainText()
+        total_mail = len(emaillist.split())
+        for i, emailid in enumerate(emaillist.split()):
+            print(i)
+            print("len: ", total_mail)
+            if sub:
+                # result = email_obj.send(emailid, sub)
+                email_obj.send(emailid, sub)
+            else:
+                # result = email_obj.send(emailid)
+                email_obj.send(emailid)
+
+            if i+1 == total_mail:
+                print("all mails send!")
+                self.printdialoguebox()
+
+            # check if email was send successfully
+            # and print the msg/notification acordingly
+            # if result:
+            #     self.successmsg(emailid)
+            # else:
+            #     self.failedmsg(emailid)
+
+    def printdialoguebox(self):
+        msg = QMessageBox()
+        # msg.setText("Status")
+        msg.setInformativeText(
+            'operations successful! check logs for more details.')
+        msg.setWindowTitle("Status")
+        msg.exec_()
+
+    # def failedmsg(self, email):
+    #     pass
+
+    # def successmsg(self, email):
+    #     pass
+
 
 if __name__ == "__main__":
     import sys
