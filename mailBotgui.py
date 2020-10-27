@@ -118,20 +118,14 @@ class Ui_MainWindow(object):
     #     self.sendbutton.clicked.connect(self.printfunc())
 
     def sendmail(self):
-
         mail_to = "example@gmail.com"
-
         email_obj = Email(mail_to)
 
         if mail_to:
             email_obj.send()
         else:
             print("mail id not found")
-
-
-def printfunc(self):
-    print("send button clicked!")
-
+            
 
 if __name__ == "__main__":
     import sys
