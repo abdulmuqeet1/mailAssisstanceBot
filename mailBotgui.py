@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ple# -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'mailBot.ui'
 #
@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
 
     def sendmail(self):
 
-        mail_to = "tacc1126@gmail.com"
+        mail_to = "example@gmail.com"
 
         email_obj = Email(mail_to)
 
