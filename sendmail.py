@@ -70,9 +70,3 @@ class Email:
     # # def htmlpart(self):
     # #     pass
 
-
-# def sendmail():
-#     filename = "emailist.txt"
-#     emaillist = open(filename).read()
-#     for emailid in emaillist.split(" "):
-#         email(emailid)
